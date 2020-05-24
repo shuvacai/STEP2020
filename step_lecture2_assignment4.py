@@ -44,7 +44,6 @@ class Cache:
       self.cache_map.pop(url)
       self.cache_map[url] = item
 
-
     # If item not in the cache, create a new link and add to the top.
     else:
       new_cache_link = Link()
@@ -65,29 +64,27 @@ class Cache:
 
   def get_pages(self):
     cache_list = list(self.cache_map.keys())[::-1]
-
     return cache_list
-
+  
 
   # Remove item from the Hashmap. Corrects the links.
   def removeItem(self, item):
     if item.left != None:
-      item.left.right = item.right
+      item.left.right = item.right  # (Link  Left -> Right)
     else:
       self.start = item.right
     if item.right.url != None:
-      item.right.left = item.left
+      item.right.left = item.left   # (Link  Left <- Right)
     else:
       self.end = item.left
 
   # Add item to the hash map, so that the item comes to the top of the linked list.
-  def addItemAtTop(self, item):
-    
-    item.right = self.start   # (Item -> start)
+  def addItemAtTop(self, item): 
+    item.right = self.start   # (Link  Item -> start)
     item.left = None
     if self.start != None:
-      self.start.left = item    #(Item <-> start)
-    self.start = item           # set item as a new start
+      self.start.left = item    #(Link  Item <- start)
+    self.start = item           # Sets item as a new start
     if self.end.url == None:
       self.end = self.start
       
