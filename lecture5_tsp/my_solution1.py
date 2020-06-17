@@ -81,7 +81,7 @@ def two_opt_solve(cities):   # Opt2 method
     best_order = []
     j = 0
 
-    for i in range(1):   # Try with different initial order
+    for i in range(50):   # Try with different initial order  // For large number of nodes, decrease this number
         print(i)
         cities_order = list(np.random.permutation(len(cities)))
 
